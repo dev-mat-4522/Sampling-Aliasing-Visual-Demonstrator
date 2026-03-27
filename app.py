@@ -296,6 +296,11 @@ if show_frequency_domain:
         annotation_text="Nyquist Freq",
         row=1, col=2
     )
+    fig_freq.update_xaxes(
+    title_text="Frequency (Hz)",
+    range=[0, max(signal_frequency * 3, aliasing_info['nyquist_frequency'] * 1.5)],  # zoom in
+    row=1, col=1
+)
     
     fig_freq.update_xaxes(title_text="Frequency (Hz)", row=1, col=1)
     fig_freq.update_xaxes(title_text="Frequency (Hz)", row=1, col=2)
