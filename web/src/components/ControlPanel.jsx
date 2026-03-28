@@ -9,6 +9,7 @@ export default function ControlPanel({
   showReconstruction, setShowReconstruction,
   showFFT, setShowFFT,
   useSinc, setUseSinc,
+  show3D, setShow3D,
   applyPreset,
 }) {
   const nyquistRate = getRecommendedSamplingFrequency(signalFreq);
@@ -152,6 +153,14 @@ export default function ControlPanel({
           <span className="toggle-label">Sinc Interpolation</span>
           <label className="toggle-switch">
             <input type="checkbox" checked={useSinc} onChange={e => setUseSinc(e.target.checked)} />
+            <span className="toggle-track" />
+          </label>
+        </div>
+
+        <div className="toggle-group">
+          <span className="toggle-label">3D Spectrum</span>
+          <label className="toggle-switch">
+            <input type="checkbox" checked={show3D} onChange={e => setShow3D(e.target.checked)} />
             <span className="toggle-track" />
           </label>
         </div>

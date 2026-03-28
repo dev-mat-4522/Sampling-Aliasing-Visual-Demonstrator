@@ -4,6 +4,7 @@ import ControlPanel from './components/ControlPanel';
 import StatusRow from './components/StatusRow';
 import TimeDomainPlot from './components/TimeDomainPlot';
 import FrequencyPlot from './components/FrequencyPlot';
+import Frequency3DPlot from './components/Frequency3DPlot';
 import EducationPanel from './components/EducationPanel';
 import MetricsPanel from './components/MetricsPanel';
 import {
@@ -39,6 +40,7 @@ export default function App() {
   const [showReconstruction, setShowReconstruction] = useState(true);
   const [showFFT, setShowFFT] = useState(true);
   const [useSinc, setUseSinc] = useState(false);
+  const [show3D, setShow3D] = useState(true);
 
   // Presets
   const applyPreset = (preset) => {
@@ -101,6 +103,7 @@ export default function App() {
           showReconstruction={showReconstruction} setShowReconstruction={setShowReconstruction}
           showFFT={showFFT} setShowFFT={setShowFFT}
           useSinc={useSinc} setUseSinc={setUseSinc}
+          show3D={show3D} setShow3D={setShow3D}
           applyPreset={applyPreset}
         />
       </motion.aside>
@@ -149,6 +152,26 @@ export default function App() {
                   fftSamp={data.fftSamp}
                   nyquistFreq={data.aliasInfo.nyquistFrequency}
                   signalFreq={signalFreq}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* 3D Frequency Plot */}
+          <AnimatePresence>
+            {show3D && (
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                animate="show"
+                exit={{ opacity: 0, y: -16, transition: { duration: 0.3 } }}
+              >
+                <Frequency3DPlot
+                  fftOrig={data.fftOrig}
+                  fftSamp={data.fftSamp}
+                  nyquistFreq={data.aliasInfo.nyquistFrequency}
+                  signalFreq={signalFreq}
+                  criterionMet={data.aliasInfo.criterionMet}
                 />
               </motion.div>
             )}
